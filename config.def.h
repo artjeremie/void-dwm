@@ -229,7 +229,7 @@ static Key keys[] = {
 
     { 0,    XK_Print,                   spawn,              SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
     { 0,    XF86XK_AudioRaiseVolume,    spawn,              SHCMD("pamixer --allow-boost -i 5; pulsevol; pkill -RTMIN+17 dwmblocks") },
-    { 0,    XF86XK_AudioLowerVolume,    spawn,              SHCMD("pamixer --allow-boost -d 5; pulsevol; pkill -RTMIN+17 pidof dwmblocks") },
+    { 0,    XF86XK_AudioLowerVolume,    spawn,              SHCMD("pamixer --allow-boost -d 5; pulsevol; pkill -RTMIN+17 dwmblocks") },
 };
 
 /* Button definitions */
