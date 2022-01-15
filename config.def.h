@@ -27,6 +27,7 @@ static const char orange[]          = "#fabd2f";
 static const char yellow[]          = "#d79921";
 static const char pink[]            = "#d3869b";
 static const char col_borderbar[]   = "#222526"; // inner border
+
 static const char *colors[][3]      = {
 	/*                     fg     bg     border   */
 	[SchemeNorm]       = { gray3, black, gray2 },
@@ -132,6 +133,8 @@ static const Layout layouts[] = {
 
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+#define STATUSBAR "dwmblocks"
+
 #include <X11/XF86keysym.h>
 
 /* Commands */
@@ -236,7 +239,9 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
+    { ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
+    { ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
