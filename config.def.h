@@ -196,7 +196,7 @@ static Key keys[] = {
     { MODKEY,               XK_F5,      spawn,              SHCMD("varecord") },
     { MODKEY,               XK_F6,      spawn,              SHCMD("camtoggle") },
     { MODKEY,               XK_F7,      spawn,              SHCMD("cluttertoggle") },
-    { MODKEY,               XK_F8,      spawn,              SHCMD(TERMINAL " -e pulsemixer") },
+    { MODKEY,               XK_F8,      spawn,              SHCMD(TERMINAL " -e pulsemixer; kill -17 $(pidof dwmblocks)") },
     { MODKEY,               XK_F9,      spawn,              SHCMD("dmenu-mount") },
     { MODKEY,               XK_F10,     spawn,              SHCMD("dmenu-unmount") },
     { MODKEY,               XK_F11,     spawn,              SHCMD("mpv --no-cache --no-osc --no-input-default-bindings --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
@@ -208,13 +208,13 @@ static Key keys[] = {
     { MODKEY,               XK_c,       spawn,              SHCMD("calendar") },
     { MODKEY,               XK_g,       spawn,              SHCMD(TERMINAL " -e htop") },
     { MODKEY,               XK_e,       spawn,              SHCMD(TERMINAL " -e lf") },
-    { ALTKEY,               XK_e,       spawn,              SHCMD(TERMINAL " -e neomutt") },
-    { MODKEY,               XK_n,       spawn,              SHCMD(TERMINAL " -e newsboat") },
+    { ALTKEY,               XK_e,       spawn,              SHCMD(TERMINAL " -e neomutt; pkill -RTMIN+18 dwmblocks") },
+    { MODKEY,               XK_n,       spawn,              SHCMD(TERMINAL " -e newsboat; pkill -RTMIN+19 dwmblocks") },
     { MODKEY,               XK_p,       spawn,              SHCMD("mpc toggle") },
     { MODKEY|ShiftMask,     XK_p,       spawn,              SHCMD("mpc pause ; pauseallmpv") },
     { MODKEY,               XK_m,       spawn,              SHCMD("signal-desktop") },
-    { MODKEY,               XK_equal,   spawn,              SHCMD("pamixer --allow-boost -i 5; pulsevol") },
-    { MODKEY,               XK_minus,   spawn,              SHCMD("pamixer --allow-boost -d 5; pulsevol") },
+    { MODKEY,               XK_equal,   spawn,              SHCMD("pamixer --allow-boost -i 5; pulsevol; kill -17 $(pidof dwmblocks)") },
+    { MODKEY,               XK_minus,   spawn,              SHCMD("pamixer --allow-boost -d 5; pulsevol; kill -17 $(pidof dwmblocks)") },
     { MODKEY,               XK_comma,   spawn,              SHCMD("mpc prev") },
     { MODKEY,               XK_period,  spawn,              SHCMD("mpc next") },
     { MODKEY|ShiftMask,     XK_comma,   spawn,              SHCMD("mpc seek -10") },
@@ -228,8 +228,8 @@ static Key keys[] = {
     { MODKEY,               XK_w,       spawn,              SHCMD("searchweb") },
 
     { 0,    XK_Print,                   spawn,              SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
-    { 0,    XF86XK_AudioRaiseVolume,    spawn,              SHCMD("pamixer --allow-boost -i 5; pulsevol") },
-    { 0,    XF86XK_AudioLowerVolume,    spawn,              SHCMD("pamixer --allow-boost -d 5; pulsevol") },
+    { 0,    XF86XK_AudioRaiseVolume,    spawn,              SHCMD("pamixer --allow-boost -i 5; pulsevol; kill -17 $(pidof dwmblocks)") },
+    { 0,    XF86XK_AudioLowerVolume,    spawn,              SHCMD("pamixer --allow-boost -d 5; pulsevol; kill -17 $(pidof dwmblocks)") },
 };
 
 /* Button definitions */
