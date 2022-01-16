@@ -11,7 +11,7 @@ static int smartgaps                = 0;        /* 1 means no outer gap when the
 static const int colorfultag        = 1;        /* 0 means use SchemeSel for selected tag */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=12", "FontAwesome:size=12:antialias=true:autohint=true" };
+static const char *fonts[]          = { "monospace:size=10", "FontAwesome:size=12:antialias=true:autohint=true" };
 
 /* Colors */
 static const char black[]           = "#1d2021";
