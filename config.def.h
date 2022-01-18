@@ -212,7 +212,7 @@ static Key keys[] = {
     { MODKEY,               XK_Insert,  spawn,              SHCMD("showclip") },
     { MODKEY,               XK_grave,   spawn,              SHCMD("emojis") },
     { MODKEY,               XK_b,       spawn,              SHCMD("$BROWSER") },
-    { MODKEY,               XK_c,       spawn,              SHCMD("calendar") },
+    { MODKEY,               XK_c,       spawn,              SHCMD("calnotify") },
     { MODKEY,               XK_g,       spawn,              SHCMD(TERMINAL " -e htop") },
     { MODKEY,               XK_e,       spawn,              SHCMD(TERMINAL " -e lf") },
     { ALTKEY,               XK_e,       spawn,              SHCMD(TERMINAL " -e neomutt; pkill -RTMIN+18 dwmblocks") },
