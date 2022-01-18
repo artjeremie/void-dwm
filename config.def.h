@@ -230,7 +230,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,     XK_Print,   spawn,              SHCMD("keyshot") },
     { MODKEY|ShiftMask,     XK_z,       spawn,              SHCMD("manterm") },
     { MODKEY,               XK_z,       spawn,              SHCMD("manzathura") },
-    { MODKEY|ShiftMask,     XK_n,       spawn,              SHCMD("notes") },
+    { MODKEY|ShiftMask,     XK_n,       spawn,              SHCMD(TERMINAL " -e notes") },
     { MODKEY,               XK_s,       spawn,              SHCMD("searchplaylist") },
     { MODKEY,               XK_w,       spawn,              SHCMD("searchweb") },
 
