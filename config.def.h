@@ -188,7 +188,7 @@ static Key keys[] = {
 	TAGKEYS(                XK_3,                            2)
 	TAGKEYS(                XK_4,                            3)
 	TAGKEYS(                XK_5,                            4)
-    { MODKEY,               XK_r,       spawn,              SHCMD("powermenu") },
+    { MODKEY,               XK_Escape,  spawn,              SHCMD("powermenu") },
     { MODKEY,               XK_x,       togglescratch,      {.ui = 0} },
     { MODKEY|ShiftMask,     XK_b,       togglescratch,      {.ui = 1} },
     { MODKEY|ShiftMask,     XK_m,       togglescratch,      {.ui = 2} },
