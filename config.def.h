@@ -196,7 +196,7 @@ static Key keys[] = {
     { MODKEY,                   XK_Delete,  spawn,              SHCMD("varecord kill") },
     { ALTKEY,                   XK_Delete,  spawn,              SHCMD("camtoggle kill") },
     { MODKEY,                   XK_d,       spawn,              SHCMD("dmenu_run") },
-    { MODKEY,                   XK_F1,      spawn,              SHCMD("slock") },
+    { MODKEY,                   XK_F1,      spawn,              SHCMD("upnotify") },
     { MODKEY,                   XK_F2,      spawn,              SHCMD("crontoggle") },
     { MODKEY,                   XK_F3,      spawn,              SHCMD("gtok") },
     { MODKEY,                   XK_F4,      spawn,              SHCMD("picomtoggle") },
