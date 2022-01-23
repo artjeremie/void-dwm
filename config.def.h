@@ -218,7 +218,6 @@ static Key keys[] = {
     { MODKEY,               XK_o,       spawn,              SHCMD(TERMINAL " -e lf") },
     { MODKEY,               XK_n,       spawn,              SHCMD(TERMINAL " -e newsboat; pkill -RTMIN+19 dwmblocks") },
     { MODKEY,               XK_p,       spawn,              SHCMD("mpc toggle") },
-    { MODKEY|ShiftMask,     XK_p,       spawn,              SHCMD("mpc pause ; pauseallmpv") },
     { ALTKEY,               XK_m,       spawn,              SHCMD(TERMINAL " -e neomutt; pkill -RTMIN+18 dwmblocks") },
     { MODKEY,               XK_m,       spawn,              SHCMD("signal-desktop") },
     { MODKEY,               XK_equal,   spawn,              SHCMD("audiobar 0 +5; pkill -RTMIN+17 dwmblocks") },
