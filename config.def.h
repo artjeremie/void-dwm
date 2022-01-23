@@ -221,8 +221,8 @@ static Key keys[] = {
     { MODKEY|ShiftMask,     XK_p,       spawn,              SHCMD("mpc pause ; pauseallmpv") },
     { ALTKEY,               XK_m,       spawn,              SHCMD(TERMINAL " -e neomutt; pkill -RTMIN+18 dwmblocks") },
     { MODKEY,               XK_m,       spawn,              SHCMD("signal-desktop") },
-    { MODKEY,               XK_equal,   spawn,              SHCMD("pamixer --allow-boost -i 5; pkill -RTMIN+17 dwmblocks") },
-    { MODKEY,               XK_minus,   spawn,              SHCMD("pamixer --allow-boost -d 5; pkill -RTMIN+17 dwmblocks") },
+    { MODKEY,               XK_equal,   spawn,              SHCMD("audiobar 0 +5; pkill -RTMIN+17 dwmblocks") },
+    { MODKEY,               XK_minus,   spawn,              SHCMD("audiobar 0 -5; pkill -RTMIN+17 dwmblocks") },
     { MODKEY,               XK_comma,   spawn,              SHCMD("mpc prev") },
     { MODKEY,               XK_period,  spawn,              SHCMD("mpc next") },
     { MODKEY|ShiftMask,     XK_comma,   spawn,              SHCMD("mpc seek -10") },
@@ -236,8 +236,8 @@ static Key keys[] = {
     { MODKEY,               XK_w,       spawn,              SHCMD("searchweb") },
 
     { 0,    XK_Print,                   spawn,              SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
-    { 0,    XF86XK_AudioRaiseVolume,    spawn,              SHCMD("pamixer --allow-boost -i 5; pkill -RTMIN+17 dwmblocks") },
-    { 0,    XF86XK_AudioLowerVolume,    spawn,              SHCMD("pamixer --allow-boost -d 5; pkill -RTMIN+17 dwmblocks") },
+    { 0,    XF86XK_AudioRaiseVolume,    spawn,              SHCMD("audiobar 0 +5; pkill -RTMIN+17 dwmblocks") },
+    { 0,    XF86XK_AudioLowerVolume,    spawn,              SHCMD("audiobar 0 -5; pkill -RTMIN+17 dwmblocks") },
 };
 
 /* Button definitions */
