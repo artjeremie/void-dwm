@@ -203,7 +203,7 @@ static Key keys[] = {
     { MODKEY,                   XK_F3,      spawn,              SHCMD("gtok") },
     { MODKEY,                   XK_F4,      spawn,              SHCMD("picomtoggle") },
     { MODKEY,                   XK_F5,      spawn,              SHCMD("varecord") },
-    { MODKEY,                   XK_F6,      spawn,              SHCMD("camtoggle") },
+    { MODKEY,                   XK_F6,      spawn,              SHCMD("takepic") },
     { MODKEY,                   XK_F7,      spawn,              SHCMD("cluttertoggle") },
     { MODKEY,                   XK_F8,      spawn,              SHCMD(TERMINAL " -e pulsemixer; pkill -RTMIN+17 dwmblocks") },
     { MODKEY,                   XK_F9,      spawn,              SHCMD("dmenu-mount") },
