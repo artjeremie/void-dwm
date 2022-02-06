@@ -1,16 +1,16 @@
 /* See LICENSE file for copyright and license details. */
 #define TERMINAL "st"
 /* Appearance */
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
-static const unsigned int snap      = 0;        /* snap pixel */
-static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 20;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 20;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 20;       /* vert outer gap between windows and screen edge */
-static int smartgaps                = 0;        /* 1 means no outer gap when there is only one window */
-static const int colorfultag        = 1;        /* 0 means use SchemeSel for selected tag */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static const unsigned int borderpx  = 3;    /* border pixel of windows */
+static const unsigned int snap      = 0;    /* snap pixel */
+static const unsigned int gappih    = 20;   /* horiz inner gap between windows */
+static const unsigned int gappiv    = 20;   /* vert inner gap between windows */
+static const unsigned int gappoh    = 20;   /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 20;   /* vert outer gap between windows and screen edge */
+static int smartgaps                = 0;    /* 1 means no outer gap when there is only one window */
+static const int colorfultag        = 1;    /* 0 means use SchemeSel for selected tag */
+static const int showbar            = 1;    /* 0 means no bar */
+static const int topbar             = 1;    /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=13", "FontAwesome:size=14:antialias=true:autohint=true" };
 
 /* Colors */
@@ -18,28 +18,25 @@ static const char black[]           = "#1d2021";
 static const char gray2[]           = "#282b2c"; // unfocused window border
 static const char gray3[]           = "#5d6061";
 static const char gray4[]           = "#282b2c";
-static const char red[]             = "#770000";  // focused window border
-static const char green[]           = "#98971a";
-static const char blue[]            = "#458588";
-static const char cyan[]            = "#83a598";
-static const char bred[]            = "#cc241d";
-static const char orange[]          = "#fabd2f";
-static const char yellow[]          = "#d79921";
-static const char pink[]            = "#d3869b";
-static const char col_borderbar[]   = "#222526"; // inner border
+static const char red[]             = "#770000"; // focused window border
+static const char green[]           = "#a9b665";
+static const char blue[]            = "#7daea3";
+static const char red2[]            = "#ea6962";
+static const char yellow[]          = "#e78a4e";
+static const char magenta[]         = "#d3869b";
 
 static const char *colors[][3]      = {
-	/*                     fg     bg     border   */
-	[SchemeNorm]       = { gray3, black, gray2 },
-	[SchemeSel]        = { gray4, black, red   },
-    [SchemeTitle]      = { blue,  black, black },
-    [SchemeTag]        = { gray3, black, black },
-    [SchemeTag1]       = { blue,  black, black },
-    [SchemeTag2]       = { bred,  black, black },
-    [SchemeTag3]       = { orange, black,black },
-    [SchemeTag4]       = { green, black, black },
-    [SchemeTag5]       = { pink,  black, black },
-    [SchemeLayout]     = { green, black, black },
+	/*              fg              bg      border  */
+	[SchemeNorm]    = { gray3,      black,  gray2 },
+	[SchemeSel]     = { gray4,      black,  red   },
+    [SchemeTitle]   = { blue,       black,  black },
+    [SchemeTag]     = { gray3,      black,  black },
+    [SchemeTag1]    = { blue,       black,  black },
+    [SchemeTag2]    = { red2,       black,  black },
+    [SchemeTag3]    = { yellow,     black,  black },
+    [SchemeTag4]    = { green,      black,  black },
+    [SchemeTag5]    = { magenta,    black,  black },
+    [SchemeLayout]  = { green,      black,  black },
 };
 
 typedef struct {
@@ -50,10 +47,10 @@ const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
 const char *spcmd3[] = {TERMINAL, "-n", "spncmp", "-g", "120x34", "-e", "ncmpcpp", NULL };
 static Sp scratchpads[] = {
-    /* name         cmd  */
-    {"spterm",      spcmd1},
-    {"spcalc",      spcmd2},
-    {"spncmp",      spcmd3},
+    /* name     cmd  */
+    {"spterm",  spcmd1},
+    {"spcalc",  spcmd2},
+    {"spncmp",  spcmd3},
 };
 
 /* Tagging */
@@ -61,10 +58,10 @@ static const char *tags[] = { "HOME", "BROWSER", "MAIL", "GAMES", "DEV" };
 
 static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3, SchemeTag4, SchemeTag5 };
 
-static const unsigned int ulinepad      = 5;    /* horizontal padding between the underline and tag */
-static const unsigned int ulinestroke   = 2;    /* thickness / height of the underline */
-static const unsigned int ulinevoffset  = 0;    /* how far above the bottom of the bar the line should appear */
-static const int ulineall               = 0;    /* 1 to show underline on all tags, 0 for just the active ones */
+static const unsigned int ulinepad      = 5; /* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke   = 2; /* thickness / height of the underline */
+static const unsigned int ulinevoffset  = 0; /* how far above the bottom of the bar the line should appear */
+static const int ulineall               = 0; /* 1 to show underline on all tags, 0 for just the active ones */
 
 static const Rule rules[] = {
 	/*  WM_CLASS(STRING) = instance, class */
