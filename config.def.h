@@ -78,7 +78,7 @@ static const Rule rules[] = {
     { NULL,             NULL,       "Downloading file",         1 << 4,         1,              -1 },
     { NULL,             NULL,       "Wine Mono Installer",      1 << 4,         1,               1 },
     { NULL,             NULL,       "Battle.net Setup",         1 << 4,         1,               1 },
-    { NULL,             NULL,       "Battle.net",               1 << 3,         1,               1 },
+    { NULL,             NULL,       "Battle.net",               1 << 4,         1,               1 },
     { NULL,             NULL,       "World of Warcraft",        1 << 3,         0,              -1 },
     { "discord",        NULL,       "Discord",                  1 << 4,         1,               1 },
     { NULL,             NULL,       "Discord",                  1 << 4,         1,               1 },
