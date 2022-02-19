@@ -233,9 +233,9 @@ static Key keys[] = {
     { MODKEY|ShiftMask,         XK_n,       spawn,              SHCMD(TERMINAL " -e notes") },
     { MODKEY,                   XK_s,       spawn,              SHCMD("searchplaylist") },
     { MODKEY,                   XK_w,       spawn,              SHCMD("searchweb") },
-    { ControlMask,              XK_space,   spawn,              SHCMD("dunstctl close") },
-    { ControlMask|ShiftMask,    XK_space,   spawn,              SHCMD("dunstctl close-all") },
-    { ControlMask,              XK_comma,   spawn,              SHCMD("dunstctl history-pop") },
+    { ALTKEY,                   XK_space,   spawn,              SHCMD("dunstctl close") },
+    { ALTKEY|ShiftMask,         XK_space,   spawn,              SHCMD("dunstctl close-all") },
+    { ALTKEY,                   XK_comma,   spawn,              SHCMD("dunstctl history-pop") },
 
     { 0,    XK_Print,                   spawn,              SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
     { 0,    XF86XK_AudioRaiseVolume,    spawn,              SHCMD("audiobar 0 +5; pkill -RTMIN+17 dwmblocks") },
