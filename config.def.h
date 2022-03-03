@@ -46,8 +46,8 @@ typedef struct {
 const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
 const char *spcmd3[] = {TERMINAL, "-n", "spncmp", "-g", "120x34", "-e", "ncmpcpp", NULL };
-const char *spcmd4[] = {TERMINAL, "-n", "spdiary", "-g", "120x34", "-e", "nvim", "+VimwikiDiaryIndex"};
-const char *spcmd5[] = {TERMINAL, "-n", "spvwiki", "-g", "120x34", "-e", "nvim", "+VimwikiIndex"};
+const char *spcmd4[] = {TERMINAL, "-n", "spdiary", "-t", "spdiary", "-g", "120x34", "-e", "nvim", "+VimwikiDiaryIndex"};
+const char *spcmd5[] = {TERMINAL, "-n", "spvwiki", "-t", "spvwiki", "-g", "120x34", "-e", "nvim", "+VimwikiIndex"};
 
 static Sp scratchpads[] = {
     /* name     cmd  */
