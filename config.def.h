@@ -47,12 +47,14 @@ const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
 const char *spcmd3[] = {TERMINAL, "-n", "spncmp", "-g", "120x34", "-e", "ncmpcpp", NULL };
 const char *spcmd4[] = {TERMINAL, "-n", "spdiary", "-g", "120x34", "-e", "diary", NULL };
+const char *spcmd4[] = {TERMINAL, "-n", "spvwiki", "-g", "120x34", "-e", "vwiki", NULL };
 static Sp scratchpads[] = {
     /* name     cmd  */
     {"spterm",  spcmd1},
     {"spcalc",  spcmd2},
     {"spncmp",  spcmd3},
     {"spdiary", spcmd4},
+    {"spvwiki", spcmd5},
 };
 
 /* Tagging */
@@ -101,6 +103,7 @@ static const Rule rules[] = {
     { NULL,             "spcalc",   NULL,                       SPTAG(1),       1,              -1 },
     { NULL,             "spncmp",   NULL,                       SPTAG(2),       1,              -1 },
     { NULL,             "spdiary",  NULL,                       SPTAG(3),       1,              -1 },
+    { NULL,             "spvwiki",  NULL,                       SPTAG(4),       1,              -1 },
 };
 
 /* Layout(s) */
@@ -196,6 +199,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,         XK_b,       togglescratch,      {.ui = 1} },    /* bc */
     { MODKEY|ShiftMask,         XK_m,       togglescratch,      {.ui = 2} },    /* ncmpcpp */
     { MODKEY|ShiftMask,         XK_d,       togglescratch,      {.ui = 3} },    /* diary */
+    { MODKEY|ShiftMask,         XK_n,       togglescratch,      {.ui = 4} },    /* vwiki */
     { MODKEY,                   XK_Delete,  spawn,              SHCMD("varecord kill") },
     { ALTKEY,                   XK_Delete,  spawn,              SHCMD("camtoggle kill") },
     { MODKEY,                   XK_d,       spawn,              SHCMD("dmenu_run") },
@@ -234,7 +238,6 @@ static Key keys[] = {
     { MODKEY|ShiftMask,         XK_Print,   spawn,              SHCMD("keyshot") },
     { MODKEY|ShiftMask,         XK_z,       spawn,              SHCMD("manterm") },
     { MODKEY,                   XK_z,       spawn,              SHCMD("manzathura") },
-    { MODKEY|ShiftMask,         XK_n,       spawn,              SHCMD(TERMINAL " -e notes") },
     { MODKEY,                   XK_s,       spawn,              SHCMD("searchplaylist") },
     { MODKEY,                   XK_w,       spawn,              SHCMD("searchweb") },
     { ALTKEY,                   XK_space,   spawn,              SHCMD("dunstctl close") },
