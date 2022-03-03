@@ -47,7 +47,7 @@ const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
 const char *spcmd3[] = {TERMINAL, "-n", "spncmp", "-g", "120x34", "-e", "ncmpcpp", NULL };
 const char *spcmd4[] = {TERMINAL, "-n", "spdiary", "-g", "120x34", "-e", "diary", NULL };
-const char *spcmd4[] = {TERMINAL, "-n", "spvwiki", "-g", "120x34", "-e", "vwiki", NULL };
+const char *spcmd5[] = {TERMINAL, "-n", "spvwiki", "-g", "120x34", "-e", "vwiki", NULL };
 static Sp scratchpads[] = {
     /* name     cmd  */
     {"spterm",  spcmd1},
