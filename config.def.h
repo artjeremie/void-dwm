@@ -46,11 +46,13 @@ typedef struct {
 const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
 const char *spcmd3[] = {TERMINAL, "-n", "spncmp", "-g", "120x34", "-e", "ncmpcpp", NULL };
+const char *spcmd4[] = {TERMINAL, "-n", "spdiary", "-g", "120x34", "-e", "diary", NULL };
 static Sp scratchpads[] = {
     /* name     cmd  */
     {"spterm",  spcmd1},
     {"spcalc",  spcmd2},
     {"spncmp",  spcmd3},
+    {"spdiary", spcmd4},
 };
 
 /* Tagging */
@@ -98,6 +100,7 @@ static const Rule rules[] = {
     { NULL,             "spterm",   NULL,                       SPTAG(0),       1,              -1 },
     { NULL,             "spcalc",   NULL,                       SPTAG(1),       1,              -1 },
     { NULL,             "spncmp",   NULL,                       SPTAG(2),       1,              -1 },
+    { NULL,             "spdiary",  NULL,                       SPTAG(3),       1,              -1 },
 };
 
 /* Layout(s) */
@@ -189,9 +192,10 @@ static Key keys[] = {
 	TAGKEYS(                    XK_5,                            4)
     { MODKEY,                   XK_Escape,  spawn,              SHCMD("powermenu") },
     { MODKEY,                   XK_r,       spawn,              SHCMD("dmenu-query") },
-    { MODKEY,                   XK_x,       togglescratch,      {.ui = 0} },
-    { MODKEY|ShiftMask,         XK_b,       togglescratch,      {.ui = 1} },
-    { MODKEY|ShiftMask,         XK_m,       togglescratch,      {.ui = 2} },
+    { MODKEY,                   XK_x,       togglescratch,      {.ui = 0} },    /* spterm */
+    { MODKEY|ShiftMask,         XK_b,       togglescratch,      {.ui = 1} },    /* bc */
+    { MODKEY|ShiftMask,         XK_m,       togglescratch,      {.ui = 2} },    /* ncmpcpp */
+    { MODKEY|ShiftMask,         XK_d,       togglescratch,      {.ui = 3} },    /* diary */
     { MODKEY,                   XK_Delete,  spawn,              SHCMD("varecord kill") },
     { ALTKEY,                   XK_Delete,  spawn,              SHCMD("camtoggle kill") },
     { MODKEY,                   XK_d,       spawn,              SHCMD("dmenu_run") },
@@ -260,3 +264,4 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
+
