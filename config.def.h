@@ -243,7 +243,7 @@ static Key keys[] = {
     { MODKEY,                   XK_w,       spawn,              SHCMD("searchweb") },
     { ALTKEY,                   XK_space,   spawn,              SHCMD("dunstctl close") },
     { ALTKEY|ShiftMask,         XK_space,   spawn,              SHCMD("dunstctl close-all") },
-    { ALTKEY,                   XK_comma,   spawn,              SHCMD("dunstctl history-pop") },
+    { ALTKEY|ShiftMask,         XK_comma,   spawn,              SHCMD("dunstctl history-pop") },
 
     { 0,    XK_Print,                   spawn,              SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
     { 0,    XF86XK_AudioRaiseVolume,    spawn,              SHCMD("audiobar 0 +5; pkill -RTMIN+17 dwmblocks") },
