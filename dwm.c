@@ -905,7 +905,7 @@ drawbar(Monitor *m)
     /* draw status first so it can be overdrawn by tags later */
     if (m == selmon || 1) { /* status is only drawn on selected monitor */
         drw_text(drw, m->ww - 2 * sp, 0, tw, bh, 0, stext, 0);
-        tw = statusw = m->ww - drawstatusbar(m, bh, stext);
+        tw = m->ww - drawstatusbar(m, bh, stext) - lrpad + -50;
     }
 
     for (c = m->clients; c; c = c->next) {
