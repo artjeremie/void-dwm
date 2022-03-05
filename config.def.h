@@ -46,16 +46,16 @@ typedef struct {
 const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
 const char *spcmd3[] = {TERMINAL, "-n", "spncmp", "-g", "120x34", "-e", "ncmpcpp", NULL };
-const char *spcmd4[] = {TERMINAL, "-n", "spdiary", "-t", "spdiary", "-g", "120x34", "-e", "nvim", "+VimwikiDiaryIndex"};
-const char *spcmd5[] = {TERMINAL, "-n", "spvwiki", "-t", "spvwiki", "-g", "120x34", "-e", "nvim", "+VimwikiIndex"};
+const char *spcmd4[] = {TERMINAL, "-n", "spdiary", "-t", "spdiary", "-g", "120x34", "-e", "nvim", "+WikiJournal"};
+const char *spcmd5[] = {TERMINAL, "-n", "spwiki", "-t", "spwiki", "-g", "120x34", "-e", "nvim", "+WikiIndex"};
 
 static Sp scratchpads[] = {
     /* name     cmd  */
     {"spterm",  spcmd1},    /* terminal */
     {"spcalc",  spcmd2},    /* calculator(bc) */
     {"spncmp",  spcmd3},    /* ncmpcpp music player */
-    {"spdiary", spcmd4},    /* vimwikiDiary */
-    {"spvwiki", spcmd5},    /* vimwikiIndex */
+    {"spdiary", spcmd4},    /* WikiJournal */
+    {"spwiki",  spcmd5},    /* WikiIndex */
 };
 
 /* Tagging */
@@ -104,7 +104,7 @@ static const Rule rules[] = {
     { NULL,             "spcalc",   NULL,                       SPTAG(1),       1,              -1 },
     { NULL,             "spncmp",   NULL,                       SPTAG(2),       1,              -1 },
     { NULL,             "spdiary",  NULL,                       SPTAG(3),       1,              -1 },
-    { NULL,             "spvwiki",  NULL,                       SPTAG(4),       1,              -1 },
+    { NULL,             "spwiki",   NULL,                       SPTAG(4),       1,              -1 },
 };
 
 /* Layout(s) */
@@ -200,7 +200,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,         XK_b,       togglescratch,      {.ui = 1} },    /* bc */
     { MODKEY|ShiftMask,         XK_m,       togglescratch,      {.ui = 2} },    /* ncmpcpp */
     { MODKEY|ShiftMask,         XK_d,       togglescratch,      {.ui = 3} },    /* diary */
-    { MODKEY|ShiftMask,         XK_n,       togglescratch,      {.ui = 4} },    /* vwiki */
+    { MODKEY|ShiftMask,         XK_n,       togglescratch,      {.ui = 4} },    /* wiki */
     { MODKEY,                   XK_Delete,  spawn,              SHCMD("varecord kill") },
     { ALTKEY,                   XK_Delete,  spawn,              SHCMD("camtoggle kill") },
     { MODKEY,                   XK_d,       spawn,              SHCMD("dmenu_run") },
