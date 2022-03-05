@@ -11,8 +11,10 @@ static int smartgaps                = 0;    /* 1 means no outer gap when there i
 static const int colorfultag        = 1;    /* 0 means use SchemeSel for selected tag */
 static const int showbar            = 1;    /* 0 means no bar */
 static const int topbar             = 1;    /* 0 means bottom bar */
-static const int horizpadbar        = 5;        /* horizontal padding for statusbar */
-static const int vertpadbar         = 11;        /* vertical padding for statusbar */
+static const int vertpad            = 10;   /* vertical padding of bar */
+static const int sidepad            = 10;   /* horizontal padding of bar */
+static const int horizpadbar        = 5;    /* horizontal padding for statusbar */
+static const int vertpadbar         = 11;   /* vertical padding for statusbar */
 static const char *fonts[]          = { "monospace:size=13", "Standard Symbols L:size=14:antialias=true:autohint=true" };
 
 /* Colors */
