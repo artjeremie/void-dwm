@@ -1641,10 +1641,22 @@ sigchld(int unused)
 }
 
 void
+sighup(int unused)
+{
+    Arg a = {.i = 1};
+    quit(&a);
+}
+
+void
+sigterm(int unused)
+{
+    Arg a = {.i = 0};
+    quit(&a);
+}
+
+void
 spawn(const Arg *arg)
 {
-	if (arg->v == dmenucmd)
-		dmenumon[0] = '0' + selmon->num;
 	if (fork() == 0) {
 		if (dpy)
 			close(ConnectionNumber(dpy));
@@ -2153,3 +2165,4 @@ main(int argc, char *argv[])
 	XCloseDisplay(dpy);
 	return EXIT_SUCCESS;
 }
+
