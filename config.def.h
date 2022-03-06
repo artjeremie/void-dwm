@@ -3,6 +3,11 @@
 /* appearance */
 static const unsigned int borderpx  = 3;    /* border pixel of windows */
 static const unsigned int snap      = 0;    /* snap pixel */
+static const unsigned int gappih    = 20;   /* horiz inner gap between windows */
+static const unsigned int gappiv    = 20;   /* vert inner gap between windows */
+static const unsigned int gappoh    = 20;   /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 20;   /* vert outer gap between windows and screen edge */
+static int smartgaps                = 0;    /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;    /* 0 means no bar */
 static const int topbar             = 1;    /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=13", "Symbols Nerd Font:size=13" };
@@ -39,11 +44,25 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
+#define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
+#include "vanitygaps.c"
+
 static const Layout layouts[] = {
 	/* symbol   arrange function */
 	{ "[]=",    tile },                     /* Default: Master on left, slaves on right */
+    { "TTT",    bstack },                   /* Master on top, slaves on bottom */
+
+    { "[@]",    spiral },                   /* Fibonacci spiral */
+    { "[\\]",   dwindle },                  /* Decreasing in size right and leftward */
+
+    { "D[]",    deck },                     /* Master on left, slaves in monocle-like mode on right */
     { "[M]",    monocle },                  /* All windows on top of eachother */
+
+    { "|M|",    centeredmaster },           /* Master in middle, slaves on sides */
+    { ">M>",    centeredfloatingmaster },   /* Same but master floats */
+
 	{ "><>",    NULL },                     /* no layout function means floating behavior */
+    { NULL,     NULL },
 };
 
 /* key definitions */
@@ -73,12 +92,20 @@ static Key keys[] = {
 	{ ALTKEY,                   XK_period,  incnmaster,         {.i = -1 } },
 	{ MODKEY,                   XK_h,       setmfact,           {.f = -0.05} },
 	{ MODKEY,                   XK_l,       setmfact,           {.f = +0.05} },
+    { MODKEY|ShiftMask,         XK_h,       setcfact,           {.f = +0.25} },
+    { MODKEY|ShiftMask,         XK_l,       setcfact,           {.f = -0.25} },
+    { MODKEY|ShiftMask,         XK_o,       setcfact,           {.f =  0.00} },
 	{ MODKEY|ShiftMask,         XK_j,       zoom,               {0} },
 	{ MODKEY,                   XK_Tab,     view,               {0} },
 	{ MODKEY,                   XK_q,       killclient,         {0} },
-	{ MODKEY,                   XK_t,       setlayout,          {.v = &layouts[0]} },
-	{ MODKEY,                   XK_f,       setlayout,          {.v = &layouts[1]} },
-	{ MODKEY,                   XK_m,       setlayout,          {.v = &layouts[2]} },
+	{ MODKEY,                   XK_t,       setlayout,          {.v = &layouts[0]} }, /* tile */
+	{ MODKEY|ShiftMask,         XK_t,       setlayout,          {.v = &layouts[1]} }, /* bstack */
+	{ MODKEY,                   XK_y,       setlayout,          {.v = &layouts[2]} }, /* spiral */
+    { MODKEY|ShiftMask,         XK_y,       setlayout,          {.v = &layouts[3]} }, /* dwindle */
+    { MODKEY,                   XK_u,       setlayout,          {.v = &layouts[4]} }, /* deck */
+    { MODKEY|ShiftMask,         XK_u,       setlayout,          {.v = &layouts[5]} }, /* monocle */
+    { MODKEY,                   XK_i,       setlayout,          {.v = &layouts[6]} }, /* centeredmaster */
+    { MODKEY|ShiftMask,         XK_i,       setlayout,          {.v = &layouts[7]} }, /* centeredfloatingmaster */
 	{ MODKEY,                   XK_space,   setlayout,          {0} },
 	{ MODKEY|ShiftMask,         XK_space,   togglefloating,     {0} },
 	{ MODKEY,                   XK_0,       view,               {.ui = ~0 } },
@@ -86,6 +113,10 @@ static Key keys[] = {
 	{ ALTKEY,                   XK_Tab,     focusmon,           {.i = +1 } },
 	{ ALTKEY|ShiftMask,         XK_h,       tagmon,             {.i = -1 } },
 	{ ALTKEY|ShiftMask,         XK_l,       tagmon,             {.i = +1 } },
+    { ALTKEY,                   XK_minus,   incrgaps,           {.i = -3 } },
+    { ALTKEY,                   XK_equal,   incrgaps,           {.i = +3 } },
+    { MODKEY,                   XK_a,       togglegaps,         {0} },
+    { MODKEY|ShiftMask,         XK_a,       defaultgaps,        {0} },
 	TAGKEYS(                    XK_1,                           0)
 	TAGKEYS(                    XK_2,                           1)
 	TAGKEYS(                    XK_3,                           2)
@@ -104,7 +135,7 @@ static Key keys[] = {
     { MODKEY,                   XK_F5,      spawn,              SHCMD("varecord") },
     { MODKEY,                   XK_F6,      spawn,              SHCMD("takepic") },
     { MODKEY,                   XK_F7,      spawn,              SHCMD("cluttertoggle") },
-    { MODKEY,                   XK_F8,      spawn,              SHCMD(TERMINAL " -e pulsemixer") },
+    { MODKEY,                   XK_F8,      spawn,              SHCMD(TERMINAL " -e pulsemixer; kill -34 $(cat ~/.cache/pidofbar)") },
     { MODKEY,                   XK_F9,      spawn,              SHCMD("dmenu-mount") },
     { MODKEY,                   XK_F10,     spawn,              SHCMD("dmenu-unmount") },
     { MODKEY,                   XK_F11,     spawn,              SHCMD("mpv --no-cache --no-osc --no-input-default-bindings --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
@@ -121,8 +152,8 @@ static Key keys[] = {
     { MODKEY,                   XK_p,       spawn,              SHCMD("mpc toggle") },
     { ALTKEY,                   XK_m,       spawn,              SHCMD(TERMINAL " -e neomutt") },
     { MODKEY,                   XK_m,       spawn,              SHCMD("signal-desktop") },
-    { MODKEY,                   XK_equal,   spawn,              SHCMD("audiobar 0 +5") },
-    { MODKEY,                   XK_minus,   spawn,              SHCMD("audiobar 0 -5") },
+    { MODKEY,                   XK_equal,   spawn,              SHCMD("audiobar 0 +5; kill -34 $(cat ~/.cache/pidofbar)") },
+    { MODKEY,                   XK_minus,   spawn,              SHCMD("audiobar 0 -5; kill -34 $(cat ~/.cache/pidofbar)") },
     { MODKEY,                   XK_comma,   spawn,              SHCMD("mpc prev") },
     { MODKEY,                   XK_period,  spawn,              SHCMD("mpc next") },
     { MODKEY|ShiftMask,         XK_comma,   spawn,              SHCMD("mpc seek -10") },
@@ -137,9 +168,9 @@ static Key keys[] = {
     { ALTKEY|ShiftMask,         XK_space,   spawn,              SHCMD("dunstctl close-all") },
     { ALTKEY|ShiftMask,         XK_comma,   spawn,              SHCMD("dunstctl history-pop") },
 
-    { 0,    XK_Print,                   spawn,              SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
-    { 0,    XF86XK_AudioRaiseVolume,    spawn,              SHCMD("audiobar 0 +5; kill -34 $(cat ~/.cache/pidofbar)") },
-    { 0,    XF86XK_AudioLowerVolume,    spawn,              SHCMD("audiobar 0 -5; kill -34 $(cat ~/.cache/pidofbar)") },
+    { 0,    XK_Print,                       spawn,              SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
+    { 0,    XF86XK_AudioRaiseVolume,        spawn,              SHCMD("audiobar 0 +5; kill -34 $(cat ~/.cache/pidofbar)") },
+    { 0,    XF86XK_AudioLowerVolume,        spawn,              SHCMD("audiobar 0 -5; kill -34 $(cat ~/.cache/pidofbar)") },
 };
 
 /* button definitions */
