@@ -138,8 +138,8 @@ static Key keys[] = {
     { ALTKEY|ShiftMask,         XK_comma,   spawn,              SHCMD("dunstctl history-pop") },
 
     { 0,    XK_Print,                   spawn,              SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
-    { 0,    XF86XK_AudioRaiseVolume,    spawn,              SHCMD("audiobar 0 +5") },
-    { 0,    XF86XK_AudioLowerVolume,    spawn,              SHCMD("audiobar 0 -5") },
+    { 0,    XF86XK_AudioRaiseVolume,    spawn,              SHCMD("audiobar 0 +5; kill -34 $(cat ~/.cache/pidofbar)") },
+    { 0,    XF86XK_AudioLowerVolume,    spawn,              SHCMD("audiobar 0 -5; kill -34 $(cat ~/.cache/pidofbar)") },
 };
 
 /* button definitions */
