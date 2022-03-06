@@ -80,7 +80,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,         XK_space,   togglefloating,     {0} },
 	{ MODKEY,                   XK_0,       view,               {.ui = ~0 } },
 	{ MODKEY|ShiftMask,         XK_0,       tag,                {.ui = ~0 } },
-	{ MLTKEY,                   XK_Tab,     focusmon,           {.i = +1 } },
+	{ ALTKEY,                   XK_Tab,     focusmon,           {.i = +1 } },
 	{ ALTKEY|ShiftMask,         XK_h,       tagmon,             {.i = -1 } },
 	{ ALTKEY|ShiftMask,         XK_l,       tagmon,             {.i = +1 } },
 	TAGKEYS(                    XK_1,                           0)
