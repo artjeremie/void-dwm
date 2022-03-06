@@ -108,6 +108,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,         XK_i,       setlayout,          {.v = &layouts[7]} }, /* centeredfloatingmaster */
 	{ MODKEY,                   XK_space,   setlayout,          {0} },
 	{ MODKEY|ShiftMask,         XK_space,   togglefloating,     {0} },
+    { MODKEY,                   XK_f,       togglefullscreen,   {0} },
 	{ MODKEY,                   XK_0,       view,               {.ui = ~0 } },
 	{ MODKEY|ShiftMask,         XK_0,       tag,                {.ui = ~0 } },
 	{ ALTKEY,                   XK_Tab,     focusmon,           {.i = +1 } },
