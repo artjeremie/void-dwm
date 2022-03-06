@@ -1641,6 +1641,20 @@ sigchld(int unused)
 }
 
 void
+sighup(int unused)
+{
+    Arg a = {.i = 1};
+    quit(&a);
+}
+
+void
+sigterm(int unused)
+{
+    Arg a = {.i = 0};
+    quit(&a);
+}
+
+void
 spawn(const Arg *arg)
 {
 	if (fork() == 0) {
