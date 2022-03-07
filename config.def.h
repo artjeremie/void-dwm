@@ -127,7 +127,7 @@ static Key keys[] = {
     { MODKEY,                   XK_F5,      spawn,              SHCMD("varecord") },
     { MODKEY,                   XK_F6,      spawn,              SHCMD("takepic") },
     { MODKEY,                   XK_F7,      spawn,              SHCMD("cluttertoggle") },
-    { MODKEY,                   XK_F8,      spawn,              SHCMD(TERMINAL " -e pulsemixer") },
+    { MODKEY,                   XK_F8,      spawn,              SHCMD(TERMINAL " -e pulsemixer; kill -34 $(cat ~/.cache/pidofbar)") },
     { MODKEY,                   XK_F9,      spawn,              SHCMD("dmenu-mount") },
     { MODKEY,                   XK_F10,     spawn,              SHCMD("dmenu-unmount") },
     { MODKEY,                   XK_F11,     spawn,              SHCMD("mpv --no-cache --no-osc --no-input-default-bindings --input-conf=/dev/null --title=webcam $(ls /dev/video[0,2,4,6,8] | tail -n 1)") },
@@ -144,8 +144,8 @@ static Key keys[] = {
     { MODKEY,                   XK_p,       spawn,              SHCMD("mpc toggle") },
     { ALTKEY,                   XK_m,       spawn,              SHCMD(TERMINAL " -e neomutt") },
     { MODKEY,                   XK_m,       spawn,              SHCMD("signal-desktop") },
-    { MODKEY,                   XK_equal,   spawn,              SHCMD("audiobar 0 +5") },
-    { MODKEY,                   XK_minus,   spawn,              SHCMD("audiobar 0 -5") },
+    { MODKEY,                   XK_equal,   spawn,              SHCMD("audiobar 0 +5; kill -34 $(cat ~/.cache/pidofbar)") },
+    { MODKEY,                   XK_minus,   spawn,              SHCMD("audiobar 0 -5; kill -34 $(cat ~/.cache/pidofbar)") },
     { MODKEY,                   XK_comma,   spawn,              SHCMD("mpc prev") },
     { MODKEY,                   XK_period,  spawn,              SHCMD("mpc next") },
     { MODKEY|ShiftMask,         XK_comma,   spawn,              SHCMD("mpc seek -10") },
@@ -161,8 +161,8 @@ static Key keys[] = {
     { ALTKEY|ShiftMask,         XK_comma,   spawn,              SHCMD("dunstctl history-pop") },
 
     { 0,    XK_Print,                   spawn,              SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
-    { 0,    XF86XK_AudioRaiseVolume,    spawn,              SHCMD("audiobar 0 +5") },
-    { 0,    XF86XK_AudioLowerVolume,    spawn,              SHCMD("audiobar 0 -5") },
+    { 0,    XF86XK_AudioRaiseVolume,    spawn,              SHCMD("audiobar 0 +5; kill -34 $(cat ~/.cache/pidofbar)") },
+    { 0,    XF86XK_AudioLowerVolume,    spawn,              SHCMD("audiobar 0 -5; kill -34 $(cat ~/.cache/pidofbar)") },
 };
 
 
