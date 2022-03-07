@@ -13,6 +13,8 @@ static const unsigned int gappov    = 20;   /* vert outer gap between windows an
 static int smartgaps                = 0;    /* 1 means no outer gap when there is only one window */
 static const int horizpadbar        = 5;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 11;        /* vertical padding for statusbar */
+static const int vertpad            = 20;       /* vertical padding of bar */
+static const int sidepad            = 20;       /* horizontal padding of bar */
 static const char *fonts[]          = { "monospace:size=13", "Standard Symbols L:size=14:antialias=true:autohint=true" };
 
 /* Colors */
