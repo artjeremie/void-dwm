@@ -6,6 +6,11 @@ static const unsigned int snap      = 0;    /* snap pixel */
 static const int showbar            = 1;    /* 0 means no bar */
 static const int topbar             = 1;    /* 0 means bottom bar */
 static const int colorfultag        = 1;    /* 0 means use SchemeSel for selected tag */
+static const unsigned int gappih    = 20;   /* horiz inner gap between windows */
+static const unsigned int gappiv    = 20;   /* vert inner gap between windows */
+static const unsigned int gappoh    = 20;   /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 20;   /* vert outer gap between windows and screen edge */
+static int smartgaps                = 0;    /* 1 means no outer gap when there is only one window */
 static const char *fonts[]          = { "monospace:size=13", "Standard Symbols L:size=14:antialias=true:autohint=true" };
 
 /* Colors */
@@ -63,13 +68,25 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
+#define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
+#include "vanitygaps.c"
+
 static const Layout layouts[] = {
 	/* symbol   arrange function */
 	{ "[]=",    tile },                     /* Default: Master on left, slaves on right */
+	{ "TTT",    bstack },                   /* Master on top, slaves on bottom */
 
+    { "[@]",    spiral },                   /* Fibonacci spiral */
+    { "[\\]",   dwindle },                  /* Decreasing in size right and leftward */
+
+    { "D[]",    deck },                     /* Master on left, slaves in monocle-like mode on right */
     { "[M]",    monocle },                  /* All windows on top of eachother */
 
-	{ "><>",    NULL },                     /* no layout function means floating behavior */
+    { "|M|",    centeredmaster },           /* Master in middle, slaves on sides */
+    { ">M>",    centeredfloatingmaster },   /* Same but master floats */
+
+    { "><>",    NULL },                     /* no layout function means floating behavior */
+    { NULL,     NULL },
 };
 
 /* key definitions */
@@ -98,23 +115,20 @@ static Key keys[] = {
 	{ ALTKEY,                   XK_period,  incnmaster,         {.i = -1 } },
 	{ MODKEY,                   XK_h,       setmfact,           {.f = -0.05} },
 	{ MODKEY,                   XK_l,       setmfact,           {.f = +0.05} },
-	/*{ MODKEY|ShiftMask,         XK_h,       setcfact,           {.f = +0.25} },
+	{ MODKEY|ShiftMask,         XK_h,       setcfact,           {.f = +0.25} },
 	{ MODKEY|ShiftMask,         XK_l,       setcfact,           {.f = -0.25} },
-	{ MODKEY|ShiftMask,         XK_o,       setcfact,           {.f =  0.00} }, */
+	{ MODKEY|ShiftMask,         XK_o,       setcfact,           {.f =  0.00} },
 	{ MODKEY|ShiftMask,         XK_j,       zoom,               {0} },
 	{ MODKEY,                   XK_Tab,     view,               {0} },
 	{ MODKEY,                   XK_q,       killclient,         {0} },
-    { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, /* to be deleted */
-    { MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} }, /* to be delete */
-    { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} }, /* to be delete */
-	/*{ MODKEY,                   XK_t,       setlayout,          {.v = &layouts[0]} }, */ /* tile */
-	/*{ MODKEY|ShiftMask,         XK_t,       setlayout,          {.v = &layouts[1]} }, */ /* bstack */
-	/*{ MODKEY,                   XK_y,       setlayout,          {.v = &layouts[2]} }, */ /* spiral */
-	/*{ MODKEY|ShiftMask,         XK_y,       setlayout,          {.v = &layouts[3]} }, */ /* dwindle */
-	/*{ MODKEY,                   XK_u,       setlayout,          {.v = &layouts[4]} }, */ /* deck */
-	/*{ MODKEY|ShiftMask,         XK_u,       setlayout,          {.v = &layouts[5]} }, */ /* monocle */
-	/*{ MODKEY,                   XK_i,       setlayout,          {.v = &layouts[6]} }, */ /* centeredmaster */
-	/*{ MODKEY|ShiftMask,         XK_i,       setlayout,          {.v = &layouts[7]} }, */ /* centeredfloatingmaster */
+	{ MODKEY,                   XK_t,       setlayout,          {.v = &layouts[0]} }, /* tile */
+	{ MODKEY|ShiftMask,         XK_t,       setlayout,          {.v = &layouts[1]} }, /* bstack */
+	{ MODKEY,                   XK_y,       setlayout,          {.v = &layouts[2]} }, /* spiral */
+	{ MODKEY|ShiftMask,         XK_y,       setlayout,          {.v = &layouts[3]} }, /* dwindle */
+	{ MODKEY,                   XK_u,       setlayout,          {.v = &layouts[4]} }, /* deck */
+	{ MODKEY|ShiftMask,         XK_u,       setlayout,          {.v = &layouts[5]} }, /* monocle */
+	{ MODKEY,                   XK_i,       setlayout,          {.v = &layouts[6]} }, /* centeredmaster */
+	{ MODKEY|ShiftMask,         XK_i,       setlayout,          {.v = &layouts[7]} }, /* centeredfloatingmaster */
 	{ MODKEY,                   XK_space,   setlayout,          {0} },
     { MODKEY|ShiftMask,         XK_space,   togglefloating,     {0} },
     { MODKEY,                   XK_f,       togglefullscreen,   {0} },
@@ -124,10 +138,10 @@ static Key keys[] = {
     { ALTKEY,                   XK_Tab,     focusmon,           {.i = +1 } },
     { ALTKEY|ShiftMask,         XK_h,       tagmon,             {.i = -1 } },
     { ALTKEY|ShiftMask,         XK_l,       tagmon,             {.i = +1 } },
-    /*{ ALTKEY,                   XK_minus,   incrgaps,           {.i = -3 } },
+    { ALTKEY,                   XK_minus,   incrgaps,           {.i = -3 } },
     { ALTKEY,                   XK_equal,   incrgaps,           {.i = +3 } },
     { MODKEY,                   XK_a,       togglegaps,         {0} },
-    { MODKEY|ShiftMask,         XK_a,       defaultgaps,        {0} }, */
+    { MODKEY|ShiftMask,         XK_a,       defaultgaps,        {0} },
 	TAGKEYS(                    XK_1,                            0)
 	TAGKEYS(                    XK_2,                            1)
 	TAGKEYS(                    XK_3,                            2)
