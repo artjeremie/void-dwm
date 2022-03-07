@@ -39,6 +39,25 @@ static const char *colors[][3]      = {
     [SchemeLayout]  = { green,      black,  black },
 };
 
+typedef struct {
+    const char *name;
+    const void *cmd;
+} Sp;
+const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
+const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
+const char *spcmd3[] = {TERMINAL, "-n", "spncmp", "-g", "120x34", "-e", "ncmpcpp", NULL };
+const char *spcmd4[] = {TERMINAL, "-n", "spdiary", "-t", "spdiary", "-g", "120x34", "-e", "nvim", "+WikiJournal"};
+const char *spcmd5[] = {TERMINAL, "-n", "spwiki", "-t", "spwiki", "-g", "120x34", "-e", "nvim", "+WikiIndex"};
+
+static Sp scratchpads[] = {
+    /* name     cmd  */
+    {"spterm",  spcmd1},    /* terminal */
+    {"spcalc",  spcmd2},    /* calculator(bc) */
+    {"spncmp",  spcmd3},    /* ncmpcpp music player */
+    {"spdiary", spcmd4},    /* WikiJournal */
+    {"spwiki",  spcmd5},    /* WikiIndex */
+};
+
 /* staticstatus */
 static const int statmonval = 0;
 
@@ -53,13 +72,42 @@ static const unsigned int ulinevoffset  = 0; /* how far above the bottom of the 
 static const int ulineall               = 0; /* 1 to show underline on all tags, 0 for just the active ones */
 
 static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	/*  WM_CLASS(STRING) = instance, class */
+	/*  WM_NAME(STRING) = title */
+	/* class            instance    title                       tags mask       isfloating      monitor */
+	{ "Gimp",           NULL,       NULL,                       1 << 4,         0,              -1 },
+	{ "firefox",        NULL,       NULL,                       1 << 1,         0,              -1 },
+    { "qutebrowser",    NULL,       NULL,                       1 << 1,         0,              -1 },
+    { "Gcr-prompter",   NULL,       NULL,                       0,              1,              -1 },
+    { "mpv",            NULL,       NULL,                       0,              1,              -1 },
+    { "Signal",         NULL,       NULL,                       1 << 2,         0,               1 },
+    { "Lutris",         NULL,       NULL,                       1 << 4,         1,               1 },
+    { "control.exe",    NULL,       NULL,                       1 << 4,         1,              -1 },
+    { NULL,             NULL,       "Downloading file",         1 << 4,         1,              -1 },
+    { NULL,             NULL,       "Wine Mono Installer",      1 << 4,         1,               1 },
+    { NULL,             NULL,       "Battle.net Setup",         1 << 3,         1,               1 },
+    { NULL,             NULL,       "Battle.net",               1 << 3,         1,               1 },
+    { NULL,             NULL,       "World of Warcraft",        1 << 3,         0,              -1 },
+    { "discord",        NULL,       "Discord",                  1 << 4,         1,               1 },
+    { NULL,             NULL,       "Discord",                  1 << 4,         1,               1 },
+    { "Steam",          NULL,       NULL,                       1 << 4,         1,               1 },
+    { NULL,             NULL,       "Steam",                    1 << 4,         1,               1 },
+    { "dota2",          NULL,       NULL,                       1 << 3,         0,              -1 },
+    { "RimWorldLinux",  NULL,       NULL,                       1 << 3,         0,              -1 },
+    { "Zenity",         NULL,       NULL,                       1 << 4,         1,              -1 },
+    { "steam_proton",   NULL,       NULL,                       1 << 4,         1,              -1 },
+    { NULL,             NULL,       "Friends List",             1 << 4,         1,               1 },
+    { NULL,             NULL,       "Wine System Tray",         1 << 4,         1,               1 },
+    { NULL,             NULL,       "Rockstar Games Launcher",  1 << 4,         1,              -1 },
+    { NULL,             NULL,       "Grand Theft Auto V",       1 << 3,         0,              -1 },
+    { NULL,             NULL,       "tremc",                    1 << 4,         0,               1 },
+    { NULL,             NULL,       "notes",                    0,              1,              -1 },
+    { NULL,             NULL,       "pulsemixer",               0,              1,              -1 },
+    { NULL,             "spterm",   NULL,                       SPTAG(0),       1,              -1 },
+    { NULL,             "spcalc",   NULL,                       SPTAG(1),       1,              -1 },
+    { NULL,             "spncmp",   NULL,                       SPTAG(2),       1,              -1 },
+    { NULL,             "spdiary",  NULL,                       SPTAG(3),       1,              -1 },
+    { NULL,             "spwiki",   NULL,                       SPTAG(4),       1,              -1 },
 };
 
 /* layout(s) */
@@ -149,11 +197,11 @@ static Key keys[] = {
 	TAGKEYS(                    XK_5,                            4)
     { MODKEY,                   XK_Escape,  spawn,              SHCMD("powermenu") },
     { MODKEY,                   XK_r,       spawn,              SHCMD("dmenu-query") },
-    /*{ MODKEY,                   XK_x,       togglescratch,      {.ui = 0} }, */    /* spterm */
-    /*{ MODKEY|ShiftMask,         XK_b,       togglescratch,      {.ui = 1} }, */    /* bc */
-    /*{ MODKEY|ShiftMask,         XK_m,       togglescratch,      {.ui = 2} }, */    /* ncmpcpp */
-    /*{ MODKEY|ShiftMask,         XK_d,       togglescratch,      {.ui = 3} }, */    /* diary */
-    /*{ MODKEY|ShiftMask,         XK_n,       togglescratch,      {.ui = 4} }, */    /* wiki */
+    { MODKEY,                   XK_x,       togglescratch,      {.ui = 0} }, /* spterm */
+    { MODKEY|ShiftMask,         XK_b,       togglescratch,      {.ui = 1} }, /* bc */
+    { MODKEY|ShiftMask,         XK_m,       togglescratch,      {.ui = 2} }, /* ncmpcpp */
+    { MODKEY|ShiftMask,         XK_d,       togglescratch,      {.ui = 3} }, /* diary */
+    { MODKEY|ShiftMask,         XK_n,       togglescratch,      {.ui = 4} }, /* wiki */
     { MODKEY,                   XK_Delete,  spawn,              SHCMD("varecord kill") },
     { ALTKEY,                   XK_Delete,  spawn,              SHCMD("camtoggle kill") },
     { MODKEY,                   XK_d,       spawn,              SHCMD("dmenu_run") },

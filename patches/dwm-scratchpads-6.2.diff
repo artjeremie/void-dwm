@@ -96,15 +96,6 @@ index 1c0b587..06265e1 100644
  	TAGKEYS(                        XK_1,                      0)
  	TAGKEYS(                        XK_2,                      1)
  	TAGKEYS(                        XK_3,                      2)
-@@ -106,7 +126,7 @@ static Button buttons[] = {
- 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
- 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
- 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
--	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-+	{ ClkClientWin,         MODKEY,         Button1,        resizemouse,    {0} },
- 	{ ClkTagBar,            0,              Button1,        view,           {0} },
- 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
- 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 diff --git a/dwm.c b/dwm.c
 index 4465af1..646aa1a 100644
 --- a/dwm.c
