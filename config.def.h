@@ -34,6 +34,9 @@ static const char *colors[][3]      = {
     [SchemeLayout]  = { green,      black,  black },
 };
 
+/* staticstatus */
+static const int statmonval = 0;
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5" };
 
