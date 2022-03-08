@@ -11,8 +11,8 @@ static const unsigned int gappiv    = 20;   // vert inner gap between windows
 static const unsigned int gappoh    = 20;   // horiz outer gap between windows and screen edge
 static const unsigned int gappov    = 20;   // vert outer gap between windows and screen edge
 static int smartgaps                = 0;    // 1 means no outer gap when there is only one window
-static const int horizpadbar        = 10;    // horizontal padding for statusbar
-static const int vertpadbar         = 10;   // vertical padding for statusbar
+static const int horizpadbar        = 5;    // horizontal padding for statusbar
+static const int vertpadbar         = 5;   // vertical padding for statusbar
 static const char *fonts[]          = { "monospace:size=13", "Symbols Nerd Font:size=13:antialias=true:autohint=true" };
 
 /* Colors */
@@ -26,7 +26,7 @@ static const char blue[]            = "#7daea3";
 static const char red2[]            = "#ea6962";
 static const char yellow[]          = "#e78a4e";
 static const char magenta[]         = "#d3869b";
-static const char col_borderbar[]   = "#5d6061";
+static const char col_borderbar[]   = "#1d2021";
 
 static const char *colors[][3]      = {
     /*              fg              bg      border  */
