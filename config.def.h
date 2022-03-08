@@ -5,23 +5,39 @@ static const unsigned int borderpx  = 3;    // border pixel of windows
 static const unsigned int snap      = 0;    // snap pixel
 static const int showbar            = 1;    // 0 means no bar
 static const int topbar             = 1;    // 0 means bottom bar
+static const int colorfultag        = 1;    // 0 means use SchemeSel for selected tag
 static const char *fonts[]          = { "monospace:size=13", "Symbols Nerd Font:size=13:antialias=true:autohint=true" };
 
 /* Colors */
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char black[]           = "#1d2021";
+static const char gray2[]           = "#282b2c"; // unfocused window border
+static const char gray3[]           = "#5d6061";
+static const char gray4[]           = "#282b2c";
+static const char red[]             = "#770000"; // focused window border
+static const char green[]           = "#a9b665";
+static const char blue[]            = "#7daea3";
+static const char red2[]            = "#ea6962";
+static const char yellow[]          = "#e78a4e";
+static const char magenta[]         = "#d3869b";
 
 static const char *colors[][3]      = {
-    /*               fg         bg         border   */
-    [SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-    [SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+    /*              fg              bg      border  */
+    [SchemeNorm]    = { gray3,      black,  gray2 },
+    [SchemeSel]     = { gray4,      black,  red   },
+    [SchemeTitle]   = { blue,       black,  black },
+    [SchemeTag]     = { gray3,      black,  black },
+    [SchemeTag1]    = { blue,       black,  black },
+    [SchemeTag2]    = { red2,       black,  black },
+    [SchemeTag3]    = { yellow,     black,  black },
+    [SchemeTag4]    = { green,      black,  black },
+    [SchemeTag5]    = { magenta,    black,  black },
+    [SchemeLayout]  = { green,      black,  black },
 };
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5" };
+
+static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3, SchemeTag4, SchemeTag5 };
 
 static const Rule rules[] = {
     /*  WM_CLASS(STRING) = instance, class */
@@ -123,7 +139,7 @@ static Key keys[] = {
     { MODKEY,                   XK_space,   setlayout,          {0} },
     { MODKEY|ShiftMask,         XK_space,   togglefloating,     {0} },
     //{ MODKEY,                   XK_f,       togglefullscreen,   {0} },
-    //{ MODKEY|ShiftMask,         XK_c,       togglecolorfultag,  {0} },
+    { MODKEY|ShiftMask,         XK_c,       togglecolorfultag,  {0} },
     { MODKEY,                   XK_0,       view,               {.ui = ~0 } },
     { MODKEY|ShiftMask,         XK_0,       tag,                {.ui = ~0 } },
     { ALTKEY,                   XK_Tab,     focusmon,           {.i = +1 } },
