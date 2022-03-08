@@ -12,15 +12,17 @@ make && sudo make install
 ```
 
 ### Patches
-- vanitygaps
-- cfacts
-- color emoji
-- pertag
-- scratchpads
 - status2d
-- statusallmons
-- steamfix
-- tagmonfixs
-- togglefullscreen
-- alwayscenter
+- statuscmd
+- colorfultag
 - titlecolor
+- underlinetags
+- pertag monitorrules
+- staticstatus
+- cfacts vanitygaps
+- togglefullscreen
+- scratchpads
+- statuspadding
+- alwayscenter
+- steamfix
+- tagmonfixfullscreen
