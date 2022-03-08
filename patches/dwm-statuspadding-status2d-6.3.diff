@@ -1,0 +1,43 @@
+diff --git a/config.def.h b/config.def.h
+index 2a1b859..25e7adc 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -11,6 +11,8 @@ static const unsigned int gappiv    = 20;   // vert inner gap between windows
+ static const unsigned int gappoh    = 20;   // horiz outer gap between windows and screen edge
+ static const unsigned int gappov    = 20;   // vert outer gap between windows and screen edge
+ static int smartgaps                = 0;    // 1 means no outer gap when there is only one window
++static const int horizpadbar        = 5;    // horizontal padding for statusbar
++static const int vertpadbar         = 11;   // vertical padding for statusbar
+ static const char *fonts[]          = { "monospace:size=13", "Symbols Nerd Font:size=13:antialias=true:autohint=true" };
+ 
+ /* Colors */
+diff --git a/dwm.c b/dwm.c
+index 1a51a20..9f75e55 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -858,14 +858,14 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
+         isCode = 0;
+     text = p;
+ 
+-    w += 2; /* 1px padding on both sides */
++    w += horizpadbar;
+     ret = x = m->ww - w;
+ 
+     drw_setscheme(drw, scheme[LENGTH(colors)]);
+     drw->scheme[ColFg] = scheme[SchemeNorm][ColFg];
+     drw->scheme[ColBg] = scheme[SchemeNorm][ColBg];
+     drw_rect(drw, x, 0, w, bh, 1, 1);
+-    x++;
++    x += horizpadbar / 2;
+ 
+     /* process status text */
+     i = -1;
+@@ -1841,7 +1841,7 @@ setup(void)
+     if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
+         die("no fonts could be loaded.");
+     lrpad = drw->fonts->h;
+-    bh = drw->fonts->h + 2;
++    bh = drw->fonts->h + vertpadbar;
+     updategeom();
+     /* init atoms */
+     utf8string = XInternAtom(dpy, "UTF8_STRING", False);
