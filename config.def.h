@@ -98,6 +98,12 @@ static const Layout layouts[] = {
     { "><>",    NULL },                     // no layout function means floating behavior
 };
 
+static const MonitorRule monrules[] = {
+    /* monitor  tag layout  mfact   nmaster showbar topbar */
+    {  1,       -1, 0,      -1,     -1,     0,      -1 }, // Second monitor
+    { -1,       -1, 0,      -1,     -1,    -1,      -1 }, // Primary monitor default
+};
+
 /* key definitions */
 #define MODKEY Mod4Mask
 #define ALTKEY Mod1Mask
