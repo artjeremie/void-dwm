@@ -823,7 +823,7 @@ dirtomon(int dir)
 
 int
 drawstatusbar(Monitor *m, int bh, char* stext) {
-    int ret, i, j, w, x, len;
+    int ret, i, j, w, x, len, sh = bh - 2 * vertpad;
     short isCode = 0;
     char *text;
     char *p;
@@ -864,14 +864,14 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
         isCode = 0;
     text = p;
 
-    w += 2; /* 1px padding on both sides */
+    w += sidepad * 2; /* add defined padding on both sides */
     ret = x = m->ww - w;
 
     drw_setscheme(drw, scheme[LENGTH(colors)]);
     drw->scheme[ColFg] = scheme[SchemeNorm][ColFg];
     drw->scheme[ColBg] = scheme[SchemeNorm][ColBg];
     drw_rect(drw, x, 0, w, bh, 1, 1);
-    x++;
+    x += sidepad;
 
     /* process status text */
     i = -1;
@@ -881,7 +881,7 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 
             text[i] = '\0';
             w = TEXTW(text) - lrpad;
-            drw_text(drw, x, 0, w, bh, 0, text, 0);
+            drw_text(drw, x, vertpad, w, sh, 0, text, 0);
 
             x += w;
 
@@ -911,7 +911,7 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
                     while (text[++i] != ',');
                     int rh = atoi(text + ++i);
 
-                    drw_rect(drw, rx + x, ry, rw, rh, 1, 0);
+                    drw_rect(drw, rx + x, ry + vertpad, rw, MIN(rh, sh - ry - 1), 1, 0);
                 } else if (text[i] == 'f') {
                     x += atoi(text + ++i);
                 }
@@ -925,7 +925,7 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 
     if (!isCode) {
         w = TEXTW(text) - lrpad;
-        drw_text(drw, x, 0, w, bh, 0, text, 0);
+        drw_text(drw, x, vertpad, w, sh, 0, text, 0);
     }
 
     drw_setscheme(drw, scheme[SchemeNorm]);
@@ -1851,7 +1851,7 @@ setup(void)
     if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
         die("no fonts could be loaded.");
     lrpad = drw->fonts->h;
-    bh = drw->fonts->h + 2;
+    bh = drw->fonts->h + 2 + vertpad * 2;
     updategeom();
     /* init atoms */
     utf8string = XInternAtom(dpy, "UTF8_STRING", False);
