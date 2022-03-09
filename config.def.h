@@ -32,7 +32,6 @@ static const char *colors[][3]      = {
     /*              fg              bg      border  */
     [SchemeNorm]    = { gray3,      black,  gray2 },
     [SchemeSel]     = { gray4,      black,  red   },
-    [SchemeTitle]   = { blue,       black,  black },
     [SchemeTag]     = { gray3,      black,  black },
     [SchemeTag1]    = { blue,       black,  black },
     [SchemeTag2]    = { red2,       black,  black },
