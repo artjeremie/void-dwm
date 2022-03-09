@@ -39,6 +39,25 @@ static const char *colors[][3]      = {
     [SchemeLayout]  = { green,      black,  black },
 };
 
+typedef struct {
+    const char *name;
+    const void *cmd;
+} Sp;
+const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
+const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
+const char *spcmd3[] = {TERMINAL, "-n", "spncmp", "-g", "120x34", "-e", "ncmpcpp", NULL };
+const char *spcmd4[] = {TERMINAL, "-n", "spdiary", "-t", "spdiary", "-g", "120x34", "-e", "nvim", "+WikiJournal"};
+const char *spcmd5[] = {TERMINAL, "-n", "spwiki", "-t", "spwiki", "-g", "120x34", "-e", "nvim", "+WikiIndex"};
+
+static Sp scratchpads[] = {
+    /* name     cmd  */
+    {"spterm",  spcmd1},    // terminal
+    {"spcalc",  spcmd2},    // calculator(bc)
+    {"spncmp",  spcmd3},    // ncmpcpp music player
+    {"spdiary", spcmd4},    // WikiJournal
+    {"spwiki",  spcmd5},    // WikiIndex
+};
+
 /* staticstatus */
 static const int statmonval = 0;
 
@@ -84,11 +103,11 @@ static const Rule rules[] = {
     { NULL,             NULL,       "tremc",                    1 << 4,         0,               1 },
     { NULL,             NULL,       "notes",                    0,              1,              -1 },
     { NULL,             NULL,       "pulsemixer",               0,              1,              -1 },
-    //{ NULL,             "spterm",   NULL,                       SPTAG(0),       1,              -1 },
-    //{ NULL,             "spcalc",   NULL,                       SPTAG(1),       1,              -1 },
-    //{ NULL,             "spncmp",   NULL,                       SPTAG(2),       1,              -1 },
-    //{ NULL,             "spdiary",  NULL,                       SPTAG(3),       1,              -1 },
-    //{ NULL,             "spwiki",   NULL,                       SPTAG(4),       1,              -1 },
+    { NULL,             "spterm",   NULL,                       SPTAG(0),       1,              -1 },
+    { NULL,             "spcalc",   NULL,                       SPTAG(1),       1,              -1 },
+    { NULL,             "spncmp",   NULL,                       SPTAG(2),       1,              -1 },
+    { NULL,             "spdiary",  NULL,                       SPTAG(3),       1,              -1 },
+    { NULL,             "spwiki",   NULL,                       SPTAG(4),       1,              -1 },
 };
 
 /* layout(s) */
@@ -187,11 +206,11 @@ static Key keys[] = {
     TAGKEYS(                    XK_5,                            4)
     { MODKEY,                   XK_Escape,  spawn,              SHCMD("powermenu") },
     { MODKEY,                   XK_r,       spawn,              SHCMD("dmenu-query") },
-    //{ MODKEY,                   XK_x,       togglescratch,      {.ui = 0} }, // spterm
-    //{ MODKEY|ShiftMask,         XK_b,       togglescratch,      {.ui = 1} }, // bc
-    //{ MODKEY|ShiftMask,         XK_m,       togglescratch,      {.ui = 2} }, // ncmpcpp
-    //{ MODKEY|ShiftMask,         XK_d,       togglescratch,      {.ui = 3} }, // diary
-    //{ MODKEY|ShiftMask,         XK_n,       togglescratch,      {.ui = 4} }, // wiki
+    { MODKEY,                   XK_x,       togglescratch,      {.ui = 0} }, // spterm
+    { MODKEY|ShiftMask,         XK_b,       togglescratch,      {.ui = 1} }, // bc
+    { MODKEY|ShiftMask,         XK_m,       togglescratch,      {.ui = 2} }, // ncmpcpp
+    { MODKEY|ShiftMask,         XK_d,       togglescratch,      {.ui = 3} }, // diary
+    { MODKEY|ShiftMask,         XK_n,       togglescratch,      {.ui = 4} }, // wiki
     { MODKEY,                   XK_Delete,  spawn,              SHCMD("varecord kill") },
     { ALTKEY,                   XK_Delete,  spawn,              SHCMD("camtoggle kill") },
     { MODKEY,                   XK_d,       spawn,              SHCMD("dmenu_run") },
