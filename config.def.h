@@ -26,7 +26,7 @@ static const char blue[]            = "#7daea3";
 static const char red2[]            = "#ea6962";
 static const char yellow[]          = "#e78a4e";
 static const char magenta[]         = "#d3869b";
-static const char col_borderbar[]   = "#1d2021";
+static const char col_borderbar[]   = "#5d6061";
 
 static const char *colors[][3]      = {
     /*              fg              bg      border  */
