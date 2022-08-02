@@ -236,6 +236,7 @@ static Key keys[] = {
     { MODKEY,                   XK_c,       spawn,              SHCMD("calnotify") },
     { MODKEY,                   XK_g,       spawn,              SHCMD(TERMINAL " -e htop") },
     { MODKEY,                   XK_o,       spawn,              SHCMD(TERMINAL " -e lf") },
+    { MODKEY,                   XK_e,       spawn,              SHCMD("emacsclient -c -n -a 'emacs'") },
     { MODKEY,                   XK_n,       spawn,              SHCMD(TERMINAL " -e newsboat; pkill -RTMIN+19 dwmblocks") },
     { MODKEY,                   XK_p,       spawn,              SHCMD("mpc toggle") },
     { ALTKEY,                   XK_m,       spawn,              SHCMD(TERMINAL " -e neomutt; pkill -RTMIN+18 dwmblocks") },
